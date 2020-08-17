@@ -48,6 +48,7 @@ func compare(old map[string]string, new map[string]string) result {
 	var result result
 	for oldPth, oldIndicator := range old {
 		newIndicator, ok := newCopy[oldPth]
+		log.Infof("OldPath: %s, OldIndicator: %s, FoundNew: %t, NewIndicator: %s", oldPth, oldIndicator, ok, newIndicator)
 		switch {
 		case !ok && oldIndicator == "-":
 			result.removedIgnored = append(result.removedIgnored, oldPth)
@@ -63,6 +64,7 @@ func compare(old map[string]string, new map[string]string) result {
 	}
 
 	for newPth, newIndicator := range newCopy {
+		log.Infof("NewPath: %s, NewIndicator: %s", newPth, newIndicator)
 		if newIndicator == "-" {
 			result.addedIgnored = append(result.addedIgnored, newPth)
 		} else {
